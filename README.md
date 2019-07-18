@@ -2,4 +2,6 @@
 
 开发常用 widget 拓展
 
-## Getting Started
+## 安装
+
+https://pub.dev/packages/flutter_widget#-installing-tab-
