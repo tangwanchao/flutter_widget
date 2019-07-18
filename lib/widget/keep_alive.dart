@@ -1,4 +1,3 @@
-library flutter_widget;
 import 'package:flutter/material.dart';
 
 /// 参考 AutomaticKeepAliveClientMixin
