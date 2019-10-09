@@ -5,3 +5,5 @@
 ## [0.0.3] - 添加了 edge_insert_observer.dart
 
 ## [1.0.1] - 更新了相关配置
+
+## [1.0.2] - 添加 keyboard_state_widget
