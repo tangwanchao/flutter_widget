@@ -7,3 +7,5 @@
 ## [1.0.1] - 更新了相关配置
 
 ## [1.0.2] - 添加 keyboard_state_widget
+
+## [1.0.3] - keyboard_state_widget 优化,添加example
