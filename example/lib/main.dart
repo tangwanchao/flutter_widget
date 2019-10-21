@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'keyboard_state_widget_example.dart';
 
 void main() => runApp(MyApp());

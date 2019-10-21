@@ -10,8 +10,19 @@ class KeyBoardStateWidgetExample extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: KeyboardStateWidget(
-          child: TextField(
-            controller: _controller,
+          child: Column(
+            children: <Widget>[
+              TextField(
+                controller: _controller,
+              ),
+              RaisedButton(
+                child: Text("新页面"), onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                  return KeyBoardStateWidgetExample();
+                }));
+              },
+              ),
+            ],
           ),
           listener: (keyBoardIsOpen) {
             _controller.text = "keyBoardIsOpen = $keyBoardIsOpen";
