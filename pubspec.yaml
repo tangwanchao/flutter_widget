@@ -1,6 +1,6 @@
 name: flutter_widget
 description: Develop common widget extensions to support development often encountered problems, such as PageView save state, get keyboard popup completion events
-version: 1.0.3
+version: 1.0.4
 author: tangwanchao <18284228392@163.com>
 homepage: https://github.com/tangwanchao/flutter_widget
 

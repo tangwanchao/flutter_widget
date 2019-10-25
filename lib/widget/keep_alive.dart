@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 /// 参考 AutomaticKeepAliveClientMixin
 class KeepAlive extends StatefulWidget{

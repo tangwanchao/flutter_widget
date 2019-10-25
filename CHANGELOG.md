@@ -9,3 +9,5 @@
 ## [1.0.2] - 添加 keyboard_state_widget
 
 ## [1.0.3] - keyboard_state_widget 优化,添加example
+
+## [1.0.4] - 优化,添加 KeyboardStateProvider 用于全局监听键盘状态

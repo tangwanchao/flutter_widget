@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 mixin BottomInsertObserver<T extends StatefulWidget> on State<T>, WidgetsBindingObserver {
   bool _didChangeMetrics = false;
@@ -10,6 +10,7 @@ mixin BottomInsertObserver<T extends StatefulWidget> on State<T>, WidgetsBinding
   ///  如果为 true 总是调用 [bottomInsertComplete]
   bool alwaysNotify = false;
 
+  @mustCallSuper
   @override
   void initState() {
     _widgetsBinding.addObserver(this);
@@ -26,8 +27,8 @@ mixin BottomInsertObserver<T extends StatefulWidget> on State<T>, WidgetsBinding
         }
 
         _preBottomInset = _bottomInset;
-        _bottomInset = MediaQuery
-            .of(context)
+        _bottomInset = MediaQueryData
+            .fromWindow(WidgetsBinding.instance.window)
             .viewInsets
             .bottom;
 
@@ -43,6 +44,7 @@ mixin BottomInsertObserver<T extends StatefulWidget> on State<T>, WidgetsBinding
     super.initState();
   }
 
+  @mustCallSuper
   @override
   void didChangeMetrics() {
     _didChangeMetrics = true;
@@ -51,6 +53,7 @@ mixin BottomInsertObserver<T extends StatefulWidget> on State<T>, WidgetsBinding
 
   void bottomInsertComplete();
 
+  @mustCallSuper
   @override
   void dispose() {
     _widgetsBinding.removeObserver(this);

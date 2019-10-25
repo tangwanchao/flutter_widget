@@ -1,7 +1,8 @@
 # flutter_widget
 
-开发常用 widget 拓展,用于支持开发常遇到的问题,比如说 PageView 保存状态,获取键盘弹出完成事件..
+开发常用 widget
 
-## 安装
-
-https://pub.dev/packages/flutter_widget#-installing-tab-
+底部插入监听 BottomInsertObserver
+保持页面状态 KeepAlive 
+监听键盘事件 KeyboardStateWidget
+全局监听键盘事件 KeyboardStateProvider
