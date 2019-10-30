@@ -11,3 +11,5 @@
 ## [1.0.3] - keyboard_state_widget 优化,添加example
 
 ## [1.0.4] - 优化,添加 KeyboardStateProvider 用于全局监听键盘状态
+
+## [1.0.5] - 添加屏幕适配工具 ScreenUtil

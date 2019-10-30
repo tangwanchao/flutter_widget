@@ -32,7 +32,8 @@ class KeyboardStateWidget extends StatefulWidget {
   _KeyboardStateWidgetState createState() => _KeyboardStateWidgetState();
 }
 
-class _KeyboardStateWidgetState extends State<KeyboardStateWidget> with WidgetsBindingObserver, BottomInsertObserver {
+class _KeyboardStateWidgetState extends State<KeyboardStateWidget>
+    with WidgetsBindingObserver, BottomInsertObserver {
   @override
   bool get alwaysNotify => widget.alwaysNotify;
 
@@ -43,7 +44,11 @@ class _KeyboardStateWidgetState extends State<KeyboardStateWidget> with WidgetsB
 
   @override
   void bottomInsertComplete() {
-    final bottomInsert = MediaQueryData.fromWindow(WidgetsBinding.instance.window).viewInsets.bottom;
+    final bottomInsert =
+        MediaQueryData
+            .fromWindow(WidgetsBinding.instance.window)
+            .viewInsets
+            .bottom;
     widget.listener(bottomInsert >= widget.notifyBottomInsert);
   }
 }

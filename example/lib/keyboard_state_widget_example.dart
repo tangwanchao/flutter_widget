@@ -19,7 +19,8 @@ class KeyBoardStateWidgetExample extends StatelessWidget {
               // 使用 KeyboardStateProvider 提供的键盘状态
               // 这里获取的状态和上面的 KeyboardStateWidget 无关
               Consumer<KeyboardState>(
-                builder: (context, value, child) => Text("键盘是否打开${value.isOpen}"),
+                builder: (context, value, child) =>
+                    Text("键盘是否打开${value.isOpen}"),
               )
             ],
           ),

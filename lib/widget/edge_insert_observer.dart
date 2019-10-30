@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-mixin BottomInsertObserver<T extends StatefulWidget> on State<T>, WidgetsBindingObserver {
+mixin BottomInsertObserver<T extends StatefulWidget>
+on State<T>, WidgetsBindingObserver {
   bool _didChangeMetrics = false;
   WidgetsBinding _widgetsBinding = WidgetsBinding.instance;
   double _preBottomInset = 0;
