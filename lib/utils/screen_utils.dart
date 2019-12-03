@@ -9,9 +9,10 @@ class ScreenUtil {
   ///  [height] 设计图高度
   ///  请保证获取适配传入参数单位和 [width],[height] 设置单位一致
   ///  [allowFontScaling] 是否允许字体缩放,默认 false
-  static void init(BuildContext context,
-      double width,
-      double height, {
+  static void init(
+    BuildContext context,
+    double width,
+    double height, {
     bool allowFontScaling = false,
   }) {
     ArgumentError.checkNotNull(context, "context");

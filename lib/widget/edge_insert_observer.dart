@@ -16,9 +16,7 @@ mixin BottomInsertObserver<T extends StatefulWidget> on State<T>, WidgetsBinding
     _widgetsBinding.addObserver(this);
     _widgetsBinding.addPostFrameCallback((Duration timeStamp) {
       _widgetsBinding.addPersistentFrameCallback((Duration timeStamp) {
-        if (!alwaysNotify && !ModalRoute
-            .of(context)
-            .isCurrent) {
+        if (!alwaysNotify && !ModalRoute.of(context).isCurrent) {
           return;
         }
 
@@ -62,9 +60,6 @@ mixin BottomInsertObserver<T extends StatefulWidget> on State<T>, WidgetsBinding
 
   double mediaQueryBottomInset() {
     WidgetsFlutterBinding.ensureInitialized();
-    return MediaQueryData
-        .fromWindow(WidgetsBinding.instance.window)
-        .viewInsets
-        .bottom;
+    return MediaQueryData.fromWindow(WidgetsBinding.instance.window).viewInsets.bottom;
   }
 }

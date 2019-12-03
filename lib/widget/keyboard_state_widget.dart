@@ -11,8 +11,7 @@ class KeyboardStateWidget extends StatefulWidget {
     @required this.listener,
     this.notifyBottomInsert = 100,
     this.alwaysNotify = false,
-  })
-      : assert(child != null),
+  })  : assert(child != null),
         assert(listener != null),
         super(key: key);
 
@@ -75,8 +74,7 @@ class KeyboardStateProvider extends StatelessWidget {
     @required this.child,
     this.notifyBottomInsert = 100,
     this.alwaysNotify = false,
-  })
-      : assert(child != null),
+  })  : assert(child != null),
         super(key: key);
 
   /// [KeyboardStateWidget.child]
