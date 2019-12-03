@@ -13,3 +13,5 @@
 ## [1.0.4] - 优化,添加 KeyboardStateProvider 用于全局监听键盘状态
 
 ## [1.0.5] - 添加屏幕适配工具 ScreenUtil
+
+## [1.0.6] - ScreenUtil 更新

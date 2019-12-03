@@ -7,27 +7,30 @@ class KeyBoardStateWidgetExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        // KeyboardStateWidget 监听键盘状态
-        body: KeyboardStateWidget(
-          child: Column(
-            children: <Widget>[
-              TextField(
-                controller: _controller,
-              ),
-              // 使用 KeyboardStateProvider 提供的键盘状态
-              // 这里获取的状态和上面的 KeyboardStateWidget 无关
-              Consumer<KeyboardState>(
-                builder: (context, value, child) =>
-                    Text("键盘是否打开${value.isOpen}"),
-              )
-            ],
+    return KeyboardStateProvider(
+      child: SafeArea(
+        child: Scaffold(
+          // KeyboardStateWidget 监听键盘状态
+          resizeToAvoidBottomInset: false,
+          body: KeyboardStateWidget(
+            child: Column(
+              children: <Widget>[
+                TextField(
+                  controller: _controller,
+                ),
+                // 使用 KeyboardStateProvider 提供的键盘状态
+                // 这里获取的状态和上面的 KeyboardStateWidget 无关
+                Consumer<KeyboardState>(
+                  builder: (context, value, child) => Text("键盘是否打开${value.isOpen}"),
+                ),
+              ],
+            ),
+            // KeyboardStateWidget 的键盘回调
+            listener: (keyBoardIsOpen) {
+              print("isopen $keyBoardIsOpen");
+              _controller.text = "keyBoardIsOpen = $keyBoardIsOpen";
+            },
           ),
-          // KeyboardStateWidget 的键盘回调
-          listener: (keyBoardIsOpen) {
-            _controller.text = "keyBoardIsOpen = $keyBoardIsOpen";
-          },
         ),
       ),
     );

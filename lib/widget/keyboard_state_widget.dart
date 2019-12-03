@@ -32,8 +32,7 @@ class KeyboardStateWidget extends StatefulWidget {
   _KeyboardStateWidgetState createState() => _KeyboardStateWidgetState();
 }
 
-class _KeyboardStateWidgetState extends State<KeyboardStateWidget>
-    with WidgetsBindingObserver, BottomInsertObserver {
+class _KeyboardStateWidgetState extends State<KeyboardStateWidget> with WidgetsBindingObserver, BottomInsertObserver {
   @override
   bool get alwaysNotify => widget.alwaysNotify;
 
@@ -44,11 +43,7 @@ class _KeyboardStateWidgetState extends State<KeyboardStateWidget>
 
   @override
   void bottomInsertComplete() {
-    final bottomInsert =
-        MediaQueryData
-            .fromWindow(WidgetsBinding.instance.window)
-            .viewInsets
-            .bottom;
+    final bottomInsert = mediaQueryBottomInset();
     widget.listener(bottomInsert >= widget.notifyBottomInsert);
   }
 }
@@ -58,12 +53,13 @@ class _KeyboardStateWidgetState extends State<KeyboardStateWidget>
 class KeyboardState with ChangeNotifier {
   KeyboardState({
     this.isOpen = false,
-  });
+  }) : assert(isOpen != null);
 
   bool isOpen;
 
   /// 键盘状态改变调用
   keyboardStateChanged(bool isOpen) {
+    ArgumentError.checkNotNull(isOpen, "isOpen");
     if (this.isOpen == isOpen) {
       return;
     }
@@ -78,7 +74,7 @@ class KeyboardStateProvider extends StatelessWidget {
     Key key,
     @required this.child,
     this.notifyBottomInsert = 100,
-    this.alwaysNotify = true,
+    this.alwaysNotify = false,
   })
       : assert(child != null),
         super(key: key);

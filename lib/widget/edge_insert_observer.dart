@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-mixin BottomInsertObserver<T extends StatefulWidget>
-on State<T>, WidgetsBindingObserver {
+mixin BottomInsertObserver<T extends StatefulWidget> on State<T>, WidgetsBindingObserver {
   bool _didChangeMetrics = false;
   WidgetsBinding _widgetsBinding = WidgetsBinding.instance;
   double _preBottomInset = 0;
@@ -28,10 +27,7 @@ on State<T>, WidgetsBindingObserver {
         }
 
         _preBottomInset = _bottomInset;
-        _bottomInset = MediaQueryData
-            .fromWindow(WidgetsBinding.instance.window)
-            .viewInsets
-            .bottom;
+        _bottomInset = mediaQueryBottomInset();
 
         if (_preBottomInset != _bottomInset) {
           WidgetsBinding.instance.scheduleFrame();
@@ -42,12 +38,15 @@ on State<T>, WidgetsBindingObserver {
         bottomInsertComplete();
       });
     });
+
     super.initState();
   }
 
   @mustCallSuper
   @override
   void didChangeMetrics() {
+    _bottomInset = mediaQueryBottomInset();
+    _preBottomInset = _bottomInset;
     _didChangeMetrics = true;
     super.didChangeMetrics();
   }
@@ -59,5 +58,13 @@ on State<T>, WidgetsBindingObserver {
   void dispose() {
     _widgetsBinding.removeObserver(this);
     super.dispose();
+  }
+
+  double mediaQueryBottomInset() {
+    WidgetsFlutterBinding.ensureInitialized();
+    return MediaQueryData
+        .fromWindow(WidgetsBinding.instance.window)
+        .viewInsets
+        .bottom;
   }
 }
