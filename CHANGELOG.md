@@ -15,3 +15,5 @@
 ## [1.0.5] - 添加屏幕适配工具 ScreenUtil
 
 ## [1.0.6] - ScreenUtil 更新
+
+## [1.0.7] - 添加 .gitignore
