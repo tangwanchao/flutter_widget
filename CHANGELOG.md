@@ -17,3 +17,5 @@
 ## [1.0.6] - ScreenUtil 更新
 
 ## [1.0.7] - 添加 .gitignore
+
+## [1.0.8] - bug fix
