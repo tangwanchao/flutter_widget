@@ -9,7 +9,6 @@ class KeyboardStateWidget extends StatefulWidget {
     Key key,
     @required this.child,
     @required this.listener,
-    this.notifyBottomInsert = 100,
     this.alwaysNotify = false,
   })  : assert(child != null),
         assert(listener != null),
@@ -18,11 +17,8 @@ class KeyboardStateWidget extends StatefulWidget {
   final Widget child;
 
   /// 底部改变监听
-  /// true 键盘弹出
-  final ValueChanged<bool> listener;
-
-  /// 应该提醒的底部插入
-  final double notifyBottomInsert;
+  /// double 底部插入高度
+  final ValueChanged<double> listener;
 
   /// [BottomInsertObserver.alwaysNotify]
   final bool alwaysNotify;
@@ -42,8 +38,7 @@ class _KeyboardStateWidgetState extends State<KeyboardStateWidget> with WidgetsB
 
   @override
   void bottomInsertComplete() {
-    final bottomInsert = mediaQueryBottomInset();
-    widget.listener(bottomInsert >= widget.notifyBottomInsert);
+    widget.listener(mediaQueryBottomInset());
   }
 }
 
@@ -51,18 +46,30 @@ class _KeyboardStateWidgetState extends State<KeyboardStateWidget> with WidgetsB
 /// 配合 [KeyboardStateProvider] 使用
 class KeyboardState with ChangeNotifier {
   KeyboardState({
-    this.isOpen = false,
-  }) : assert(isOpen != null);
+    this.keyboardIsOpen = false,
+    this.currentBottomInset = 0,
+    this.notifyKeyboardStateChangedInsert = 100,
+  })  : assert(keyboardIsOpen != null),
+        assert(currentBottomInset >= 0),
+        assert(notifyKeyboardStateChangedInsert > 0);
 
-  bool isOpen;
+  /// 键盘是否打开
+  bool keyboardIsOpen;
+
+  /// 当前底部插入
+  double currentBottomInset;
+
+  /// 底部插入临界值,当底部插入 >= 该值时认为键盘打开
+  double notifyKeyboardStateChangedInsert;
 
   /// 键盘状态改变调用
-  keyboardStateChanged(bool isOpen) {
-    ArgumentError.checkNotNull(isOpen, "isOpen");
-    if (this.isOpen == isOpen) {
+  keyboardStateChanged(double bottomInsert) {
+    ArgumentError.checkNotNull(bottomInsert, "bottomInsert");
+    if (this.currentBottomInset == bottomInsert) {
       return;
     }
-    this.isOpen = isOpen;
+    this.currentBottomInset = bottomInsert;
+    this.keyboardIsOpen = this.currentBottomInset >= notifyKeyboardStateChangedInsert;
     notifyListeners();
   }
 }
@@ -72,16 +79,12 @@ class KeyboardStateProvider extends StatelessWidget {
   KeyboardStateProvider({
     Key key,
     @required this.child,
-    this.notifyBottomInsert = 100,
     this.alwaysNotify = false,
   })  : assert(child != null),
         super(key: key);
 
   /// [KeyboardStateWidget.child]
   final Widget child;
-
-  /// [KeyboardStateWidget.notifyBottomInsert]
-  final double notifyBottomInsert;
 
   /// [BottomInsertObserver.alwaysNotify]
   final bool alwaysNotify;
@@ -96,12 +99,11 @@ class KeyboardStateProvider extends StatelessWidget {
         value: keyboardState,
       ),
       listener: listen,
-      notifyBottomInsert: notifyBottomInsert,
       alwaysNotify: alwaysNotify,
     );
   }
 
-  listen(bool keyboardState) {
-    this.keyboardState.keyboardStateChanged(keyboardState);
+  listen(double bottomInsert) {
+    this.keyboardState.keyboardStateChanged(bottomInsert);
   }
 }

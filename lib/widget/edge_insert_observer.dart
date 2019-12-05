@@ -13,10 +13,12 @@ mixin BottomInsertObserver<T extends StatefulWidget> on State<T>, WidgetsBinding
   @mustCallSuper
   @override
   void initState() {
+    this._bottomInset = this.mediaQueryBottomInset();
+    this._preBottomInset = this._bottomInset;
     _widgetsBinding.addObserver(this);
     _widgetsBinding.addPostFrameCallback((Duration timeStamp) {
       _widgetsBinding.addPersistentFrameCallback((Duration timeStamp) {
-        if (!alwaysNotify && ModalRoute.of(context)?.isCurrent == true) {
+        if (!this.alwaysNotify && ModalRoute.of(context)?.isCurrent != true) {
           return;
         }
 
@@ -26,7 +28,6 @@ mixin BottomInsertObserver<T extends StatefulWidget> on State<T>, WidgetsBinding
 
         _preBottomInset = _bottomInset;
         _bottomInset = mediaQueryBottomInset();
-
         if (_preBottomInset != _bottomInset) {
           WidgetsBinding.instance.scheduleFrame();
           return;
@@ -43,8 +44,6 @@ mixin BottomInsertObserver<T extends StatefulWidget> on State<T>, WidgetsBinding
   @mustCallSuper
   @override
   void didChangeMetrics() {
-    _bottomInset = mediaQueryBottomInset();
-    _preBottomInset = _bottomInset;
     _didChangeMetrics = true;
     super.didChangeMetrics();
   }
@@ -59,7 +58,6 @@ mixin BottomInsertObserver<T extends StatefulWidget> on State<T>, WidgetsBinding
   }
 
   double mediaQueryBottomInset() {
-    WidgetsFlutterBinding.ensureInitialized();
-    return MediaQueryData.fromWindow(WidgetsBinding.instance.window).viewInsets.bottom;
+    return MediaQueryData.fromWindow(_widgetsBinding.window).viewInsets.bottom;
   }
 }
