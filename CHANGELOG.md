@@ -48,3 +48,7 @@
 - bug fix
 - example 代码更改
 - Provider 依赖升级到 3.2.0
+
+## [1.0.10]
+
+- KeyboardStateProvider 添加 KeyboardState 字段,方便控制键盘相关参数

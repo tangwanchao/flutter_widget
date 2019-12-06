@@ -80,7 +80,9 @@ class KeyboardStateProvider extends StatelessWidget {
     Key key,
     @required this.child,
     this.alwaysNotify = false,
+    KeyboardState keyboardState,
   })  : assert(child != null),
+        this.keyboardState = keyboardState ?? KeyboardState(),
         super(key: key);
 
   /// [KeyboardStateWidget.child]
@@ -89,7 +91,7 @@ class KeyboardStateProvider extends StatelessWidget {
   /// [BottomInsertObserver.alwaysNotify]
   final bool alwaysNotify;
 
-  final KeyboardState keyboardState = KeyboardState();
+  final KeyboardState keyboardState;
 
   @override
   Widget build(BuildContext context) {
